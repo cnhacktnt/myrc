@@ -22,6 +22,8 @@ set title                " change the terminal's title
 set visualbell           " don't beep
 set noerrorbells         " don't beep
 set fileencodings=utf-8,cp936,gb18030,big5,ucs-bom,utf-16,iso-8859-1
+set encoding=utf-8
+set tenc=utf-8
 
 
 " Mapping Settings
@@ -50,27 +52,22 @@ noremap  <Up>        gk
 inoremap <Down> <C-O>gj
 inoremap <Up>   <C-O>gk
 
-
-" Plugin Settings 
-"""""""""""""""""""
-filetype plugin indent on
-autocmd filetype python set expandtab
-" Use pathogen to easily modify the runtime path to include all
-" plugins under the ~/.vim/bundle directory
-" call pathogen#helptags()
-" call pathogen#runtime_append_all_bundles()
-
-
 " Style Settings
 """""""""""""""""""
 set tabstop=4     " a tab is four spaces
 set shiftwidth=4  " number of spaces to use for autoindenting
 set shiftround    " use multiple of shiftwidth when indenting with '<' and '>'
-set list
-set listchars=tab:>.,trail:.,extends:#,nbsp:.
-autocmd filetype html,xml set listchars-=tab:>.
 
 
-
+" Plugin Settings
+""""""""""""""""""
+filetype plugin indent on
+autocmd filetype python set expandtab
+" Use pathogen to easily modify the runtime path to include all
+" plugins under the ~/.vim/bundle directory
+" call pathogen#helptags()
+" call pathogen#runtime_append_all_bundles()" set list 
+" set listchars=tab:>.,trail:.,extends:#,nbsp:.
+" autocmd filetype html,xml set listchars-=tab:>.
 
 
