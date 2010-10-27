@@ -1,15 +1,14 @@
-
 " Common Settings
 """""""""""""""""""
 set nocompatible
 syntax on
-colorscheme pablo
+colorscheme desert
 " set nowrap      " don't wrap lines
 set backspace=indent,eol,start
                   " allow backspacing over everything in insert mode
 set autoindent    " always set autoindenting on
 set copyindent    " copy the previous indentation on autoindenting
-" set number        " always show line numbers
+set number        " always show line numbers
 set showmatch     " set show matching parenthesis
 set ignorecase    " ignore case when searching
 set ruler         " show cursor position
@@ -41,15 +40,9 @@ nmap <silent> <leader>sv :so $MYVIMRC<CR>
 nmap <silent> ,/ :nohlsearch<CR>
 cmap w!! w !sudo tee % >/dev/null
 
-" Easy window navigation
-map <C-H> <C-w>h
-map <C-J> <C-w>j
-map <C-K> <C-w>k
-map <C-L> <C-w>l
-
 " Key mappings to ease browsing long lines
-noremap  <C-j>       gj
-noremap  <C-k>       gk
+noremap  <C-J>       gj
+noremap  <C-K>       gk
 noremap  <Down>      gj
 noremap  <Up>        gk
 inoremap <Down> <C-O>gj
