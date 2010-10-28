@@ -9,6 +9,7 @@ set backspace=indent,eol,start
 set autoindent    " always set autoindenting on
 set copyindent    " copy the previous indentation on autoindenting
 set number        " always show line numbers
+set mouse=a       " enable mouse
 set showmatch     " set show matching parenthesis
 set ignorecase    " ignore case when searching
 set ruler         " show cursor position
@@ -26,27 +27,52 @@ set noerrorbells         " don't beep
 set fileencodings=utf-8,cp936,gb18030,big5,ucs-bom,utf-16,iso-8859-1
 set encoding=utf-8
 set tenc=utf-8
+set laststatus=2
+set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{CurDir()}%h\ \ \ Line:\ %l/%L:%c
+
+function! CurDir()
+    let curdir = substitute(getcwd(), '/Users/cnhacktnt/', "~/", "g")
+    return curdir
+endfunction
+
+function! HasPaste()
+    if &paste
+        return 'PASTE MODE  '
+    else
+        return ''
+    endif
+endfunction
 
 
 " Mapping Settings
 """""""""""""""""""
+
 " change the mapleader from \ to ,
 let mapleader=","
 
 " Quickly edit/reload the vimrc file
-nnoremap ; :
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
-nmap <silent> ,/ :nohlsearch<CR>
-cmap w!! w !sudo tee % >/dev/null
 
 " Key mappings to ease browsing long lines
-noremap  <C-J>       gj
-noremap  <C-K>       gk
+" noremap  <C-J>       gj
+" noremap  <C-K>       gk
 noremap  <Down>      gj
 noremap  <Up>        gk
 inoremap <Down> <C-O>gj
 inoremap <Up>   <C-O>gk
+
+" windows nagivationg
+map <C-J> <C-W>j
+map <C-K> <C-W>k
+map <C-H> <C-W>h
+map <C-L> <C-W>l
+
+" misc
+nnoremap ; :
+map <leader>pp :setlocal invpaste<cr>
+nmap <silent> ,/ :nohlsearch<CR>
+cmap w!! w !sudo tee % >/dev/null
 
 " Style Settings
 """""""""""""""""""
@@ -59,11 +85,17 @@ set shiftround    " use multiple of shiftwidth when indenting with '<' and '>'
 """"""""""""""""""
 filetype plugin indent on
 autocmd filetype python set expandtab
-" Use pathogen to easily modify the runtime path to include all
-" plugins under the ~/.vim/bundle directory
-" call pathogen#helptags()
-" call pathogen#runtime_append_all_bundles()" set list 
 " set listchars=tab:>.,trail:.,extends:#,nbsp:.
 " autocmd filetype html,xml set listchars-=tab:>.
+
+" ctaglist
+let Tlist_Ctags_Cmd="/Users/cnhacktnt/homebrew/Cellar/ctags/5.8/bin/ctags"
+nnoremap <leader>tl  :TlistToggle <CR>
+
+" fuzzyfinder
+map <leader>fb  :FufBuffer <CR>
+map <leader>fc  :FufDirWithCurrentBufferDir <CR>
+map <leader>fd  :FufDir <CR>
+map <leader>ff  :FufFile <CR>
 
 
