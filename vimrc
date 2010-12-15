@@ -79,12 +79,11 @@ cmap w!! w !sudo tee % >/dev/null
 set tabstop=4     " a tab is four spaces
 set shiftwidth=4  " number of spaces to use for autoindenting
 set shiftround    " use multiple of shiftwidth when indenting with '<' and '>'
-
+set expandtab
 
 " Plugin Settings
 """"""""""""""""""
 filetype plugin indent on
-autocmd filetype python set expandtab
 " set listchars=tab:>.,trail:.,extends:#,nbsp:.
 " autocmd filetype html,xml set listchars-=tab:>.
 
