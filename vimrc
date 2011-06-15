@@ -2,14 +2,17 @@
 """""""""""""""""""
 set nocompatible
 syntax on
-colorscheme desert
+if has('gui_running')
+    set background=dark
+    colorscheme solarized
+endif
 " set nowrap      " don't wrap lines
 set backspace=indent,eol,start
                   " allow backspacing over everything in insert mode
 set autoindent    " always set autoindenting on
 set copyindent    " copy the previous indentation on autoindenting
-set number        " always show line numbers
-set mouse=a       " enable mouse
+set nonumber      " hide line numbers
+" set mouse=a       " enable mouse
 set showmatch     " set show matching parenthesis
 set ignorecase    " ignore case when searching
 set ruler         " show cursor position
@@ -24,9 +27,9 @@ set undolevels=1000      " use many muchos levels of undo
 set title                " change the terminal's title
 set visualbell           " don't beep
 set noerrorbells         " don't beep
-set fileencodings=utf-8,cp936,gb18030,big5,ucs-bom,utf-16,iso-8859-1
-set encoding=utf-8
-set tenc=utf-8
+set encoding=utf8
+set fileencodings=utf8,cp936,gb18030,big5,iso-8859-1
+set tenc=utf8
 set laststatus=2
 set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{CurDir()}%h\ \ \ Line:\ %l/%L:%c
 
@@ -81,9 +84,11 @@ set shiftwidth=4  " number of spaces to use for autoindenting
 set shiftround    " use multiple of shiftwidth when indenting with '<' and '>'
 set expandtab
 
+
 " Plugin Settings
 """"""""""""""""""
 filetype plugin indent on
+" autocmd filetype python set expandtab
 " set listchars=tab:>.,trail:.,extends:#,nbsp:.
 " autocmd filetype html,xml set listchars-=tab:>.
 
@@ -97,4 +102,6 @@ map <leader>fc  :FufDirWithCurrentBufferDir <CR>
 map <leader>fd  :FufDir <CR>
 map <leader>ff  :FufFile <CR>
 
+" GUI Settings
+set go-=T
 
