@@ -123,9 +123,8 @@ call vundle#rc()
 
 " solarized colorscheme
 Bundle "http://github.com/altercation/vim-colors-solarized"
-" SnipMate
 Bundle "http://github.com/msanders/snipmate.vim"
-" Align
+Bundle "http://github.com/tpope/vim-surround"
 Bundle "Align"
 Bundle "mru.vim"
 nmap <silent> <Leader>rr :MRU<CR>
