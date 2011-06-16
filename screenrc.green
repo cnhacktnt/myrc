@@ -1,0 +1,3 @@
+hardstatus alwayslastline
+hardstatus string '%{= gW}%-Lw%{= KW}%50>%n%f* %t%{= gW}%+Lw%< %{= kG}%-=%D %d %M %Y %c:%s%{-}'
+vbell off

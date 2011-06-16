@@ -1,14 +1,25 @@
+" First, you need to copy this file to ~/.vimrc and do:
+" 
+"   git clone http://github.com/gmarik/vundle.git ~/.vim/vundle.git
+"
+" then you should open VIM and run :BundleInstall
+"
+" If you are using customized ruby installed by rvm like I do,
+" you should also run:
+"
+"   cd ~/.vim/bundle/Command-T/ruby/command-t
+"   ruby extconf.rb
+"   make
+
+set runtimepath+=~/.vim/vundle.git/
+
 " Common Settings
 """""""""""""""""""
 set nocompatible
 syntax on
-if has('gui_running')
-    set background=dark
-    colorscheme solarized
-endif
-" set nowrap      " don't wrap lines
 set backspace=indent,eol,start
                   " allow backspacing over everything in insert mode
+" set nowrap      " don't wrap lines
 set autoindent    " always set autoindenting on
 set copyindent    " copy the previous indentation on autoindenting
 set nonumber      " hide line numbers
@@ -33,6 +44,7 @@ set tenc=utf8
 set laststatus=2
 set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{CurDir()}%h\ \ \ Line:\ %l/%L:%c
 
+" for statusline
 function! CurDir()
     let curdir = substitute(getcwd(), '/Users/cnhacktnt/', "~/", "g")
     return curdir
@@ -45,6 +57,19 @@ function! HasPaste()
         return ''
     endif
 endfunction
+
+" restore the last editing position
+function! ResCur()
+    if line("'\"") <= line("$")
+        normal! g`"
+        return 1
+    endif
+endfunction
+
+augroup resCur
+    autocmd!
+    autocmd BufWinEnter * call ResCur()
+augroup END
 
 
 " Mapping Settings
@@ -87,21 +112,61 @@ set expandtab
 
 " Plugin Settings
 """"""""""""""""""
-filetype plugin indent on
 " autocmd filetype python set expandtab
 " set listchars=tab:>.,trail:.,extends:#,nbsp:.
 " autocmd filetype html,xml set listchars-=tab:>.
 
-" ctaglist
-let Tlist_Ctags_Cmd="/Users/cnhacktnt/homebrew/Cellar/ctags/5.8/bin/ctags"
-nnoremap <leader>tl  :TlistToggle <CR>
+filetype off
 
-" fuzzyfinder
-map <leader>fb  :FufBuffer <CR>
-map <leader>fc  :FufDirWithCurrentBufferDir <CR>
-map <leader>fd  :FufDir <CR>
-map <leader>ff  :FufFile <CR>
+" Vundle Settings " {{{
+call vundle#rc()
+
+" solarized colorscheme
+Bundle "http://github.com/altercation/vim-colors-solarized"
+" SnipMate
+Bundle "http://github.com/msanders/snipmate.vim"
+" Align
+Bundle "Align"
+Bundle "mru.vim"
+nmap <silent> <Leader>rr :MRU<CR>
+
+" FuzzyFinder
+" Bundle 'L9'
+" Bundle 'FuzzyFinder'
+" nmap <leader>fb  :FufBuffer<CR>
+" nmap <leader>fc  :FufDirWithCurrentBufferDir<CR>
+" nmap <leader>fd  :FufDir<CR>
+" nmap <leader>ff  :FufFile<CR>
+
+" tComment
+Bundle 'tComment'
+nnoremap <leader>cc :TComment<CR>
+vnoremap <leader>cc :TComment<CR>
+
+" Command-T
+Bundle "http://github.com/wincent/Command-T"
+let g:CommandTCancelMap=['<ESC>','<C-c>']
+let g:CommandTMatchWindowAtTop=1
+nmap <silent> <Leader>ff :CommandT<CR>
+nmap <silent> <Leader>fb :CommandTBuffer<CR>
+
+
+" taglist
+Bundle 'http://github.com/vim-scripts/taglist.vim'
+let Tlist_Ctags_Cmd="/Users/cnhacktnt/homebrew/Cellar/ctags/5.8/bin/ctags"
+nnoremap <leader>ct  :TlistToggle <CR>
+
+" }}}
+
+filetype plugin indent on
+
 
 " GUI Settings
-set go-=T
+if has('gui_running')
+    set go-=T
+    set guifont=Monaco:h12
+    set background=dark
+    colorscheme solarized
+endif
+
 
