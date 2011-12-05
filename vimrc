@@ -18,26 +18,29 @@ set runtimepath+=~/.vim/vundle.git/
 set nocompatible
 syntax on
 set backspace=indent,eol,start
-                  " allow backspacing over everything in insert mode
-" set nowrap      " don't wrap lines
-set autoindent    " always set autoindenting on
-set copyindent    " copy the previous indentation on autoindenting
-set nonumber      " hide line numbers
-" set mouse=a       " enable mouse
-set showmatch     " set show matching parenthesis
-set ignorecase    " ignore case when searching
-set ruler         " show cursor position
-set smartcase     " ignore case if search pattern is all lowercase,
-                  "    case-sensitive otherwise
-set smarttab      " insert tabs on the start of a line according to
-                  "    shiftwidth, not tabstop
-set hlsearch      " highlight search terms
-set incsearch     " show search matches as you type
-set history=1000         " remember more commands and search history
-set undolevels=1000      " use many muchos levels of undo
-set title                " change the terminal's title
-set visualbell           " don't beep
-set noerrorbells         " don't beep
+                    " allow backspacing over everything in insert mode
+"set nowrap         " don't wrap lines
+set complete-=i     " don't search included file for autocompletion
+set complete-=d     " don't search directory for autocompletion
+set complete-=k     " don't search dict for autocompletion
+set autoindent      " always set autoindenting on
+set copyindent      " copy the previous indentation on autoindenting
+set nonumber        " hide line numbers
+"set mouse=a        " enable mouse
+set showmatch       " set show matching parenthesis
+set ignorecase      " ignore case when searching
+set ruler           " show cursor position
+set smartcase       " ignore case if search pattern is all lowercase,
+                    " case-sensitive otherwise
+set smarttab        " insert tabs on the start of a line according to
+                    " shiftwidth, not tabstop
+set hlsearch        " highlight search terms
+set incsearch       " show search matches as you type
+set history=1000    " remember more commands and search history
+set undolevels=1000 " use many muchos levels of undo
+set title           " change the terminal's title
+set visualbell      " don't beep
+set noerrorbells    " don't beep
 set encoding=utf8
 set fileencodings=utf8,cp936,gb18030,big5,iso-8859-1
 set tenc=utf8
@@ -96,11 +99,28 @@ map <C-K> <C-W>k
 map <C-H> <C-W>h
 map <C-L> <C-W>l
 
+" tab switching
+noremap <D-1> 1gt
+noremap <D-2> 2gt
+noremap <D-3> 3gt
+noremap <D-4> 4gt
+noremap <D-5> 5gt
+noremap <D-6> 6gt
+noremap <D-7> 7gt
+noremap <D-8> 8gt
+noremap <D-9> 9gt
+noremap <D-9> 10gt
+noremap <D-S-right> gt
+noremap <D-S-left> gT
+
 " misc
 nnoremap ; :
 map <leader>pp :setlocal invpaste<cr>
 nmap <silent> ,/ :nohlsearch<CR>
 cmap w!! w !sudo tee % >/dev/null
+
+" vmap <C-c> y:call system("pbcopy", getreg("\""))<CR>
+" nmap <C-v> :call setreg("\"",system("pbpaste"))<CR>p
 
 " Style Settings
 """""""""""""""""""
@@ -122,12 +142,28 @@ filetype off
 call vundle#rc()
 
 " solarized colorscheme
-Bundle "http://github.com/altercation/vim-colors-solarized"
+" Bundle "http://github.com/altercation/vim-colors-solarized"
+Bundle "mayansmoke"
 Bundle "http://github.com/msanders/snipmate.vim"
 Bundle "http://github.com/tpope/vim-surround"
 Bundle "Align"
+Bundle "YankRing.vim"
+nnoremap <silent> <Leader>yy :YRShow<CR>
+
 Bundle "mru.vim"
 nmap <silent> <Leader>rr :MRU<CR>
+
+" Bundle "Conque-Shell"
+" nmap <silent> <Leader>vt <CR>:ConqueTermTab bash<CR>
+" let g:ConqueTerm_CloseOnEnd = 1
+
+Bundle "Indent-Guides"
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1 
+
+Bundle "EasyMotion"
+let g:EasyMotion_do_shade = 0
+let g:EasyMotion_leader_key = '<Leader>m' 
 
 " FuzzyFinder
 " Bundle 'L9'
@@ -158,14 +194,20 @@ nnoremap <leader>ct  :TlistToggle <CR>
 " }}}
 
 filetype plugin indent on
+filetype plugin on
+au BufRead,BufNewFile *.lbi,*.dwt setfiletype html
 
 
 " GUI Settings
 if has('gui_running')
+    colorscheme mayansmoke
+    set nu
     set go-=T
     set guifont=Monaco:h12
-    set background=dark
-    colorscheme solarized
+    hi CursorLine guibg=gray90
+    hi StatusLine guibg=#707070
+    set cursorline
+    "set background=dark
 endif
 
 
