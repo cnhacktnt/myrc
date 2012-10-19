@@ -116,7 +116,8 @@ noremap <D-S-left> gT
 " misc
 nnoremap ; :
 map <leader>pp :setlocal invpaste<cr>
-nmap <silent> ,/ :nohlsearch<CR>
+nmap <silent> <leader>/ :nohlsearch<CR>
+nmap <silent> <leader>n :set invnumber<CR>
 cmap w!! w !sudo tee % >/dev/null
 
 " vmap <C-c> y:call system("pbcopy", getreg("\""))<CR>
@@ -200,12 +201,13 @@ au BufRead,BufNewFile *.lbi,*.dwt setfiletype html
 
 " GUI Settings
 if has('gui_running')
-    colorscheme mayansmoke
+    " colorscheme mayansmoke
+    colorscheme desert
     set nu
     set go-=T
     set guifont=Monaco:h12
-    hi CursorLine guibg=gray90
-    hi StatusLine guibg=#707070
+    " hi CursorLine guibg=gray90
+    " hi StatusLine guibg=#707070
     set cursorline
     "set background=dark
 endif
