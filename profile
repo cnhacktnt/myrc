@@ -21,4 +21,4 @@ GREEN="\[\033[0;32m\]"
 CYAN="\[\033[1;36m\]"
 MAGNETA="\[\033[0;35m\]"
 
-export PS1="$GREEN\u\[\033[0m\]@$MAGNETA\h\[\033[0m\]$YELLOW\$(if [ \$(whoami) == \"$MYUSER\" ]; then parse_git_branch; fi)\[\033[0m\]:$PINK\w\n$CYAN\342\214\230\[\033[0m\] "
+export PS1="$GREEN\u$CYAN@$MAGNETA\h$YELLOW\$(if [ \$(whoami) == \"$MYUSER\" ]; then parse_git_branch; fi):$PINK\w\n$CYAN\342\214\230\[\033[0m\] "
