@@ -1,8 +1,16 @@
 alias ls="ls -wG"
 
+#function parse_git_branch {
+#  ref=$(git symbolic-ref HEAD 2> /dev/null) || return
+#  echo "("${ref#refs/heads/}")"
+#}
+
+function parse_git_dirty {
+    [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "*"
+}
+
 function parse_git_branch {
-  ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-  echo "("${ref#refs/heads/}")"
+    git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/[\1$(parse_git_dirty)]/"
 }
 
 RED="\[\033[0;31m\]"
