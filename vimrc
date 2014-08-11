@@ -2,16 +2,8 @@
 " 
 "   git clone http://github.com/gmarik/vundle.git ~/.vim/vundle.git
 "
-" then you should open VIM and run :BundleInstall
-"
-" If you are using customized ruby installed by rvm like I do,
-" you should also run:
-"
-"   cd ~/.vim/bundle/Command-T/ruby/command-t
-"   ruby extconf.rb
-"   make
+" then you should open VIM and run :PluginInstall
 
-set runtimepath+=~/.vim/vundle.git/
 
 " Common Settings
 """""""""""""""""""
@@ -73,7 +65,6 @@ augroup resCur
     autocmd!
     autocmd BufWinEnter * call ResCur()
 augroup END
-
 
 " Mapping Settings
 """""""""""""""""""
@@ -139,60 +130,118 @@ set expandtab
 
 filetype off
 
-" Vundle Settings " {{{
-call vundle#rc()
+" Vundle Begin 
+""""""""""""""""
+set runtimepath+=~/.vim/vundle.git/
+call vundle#begin()
+
+" Plugin 'mayansmoke'
 
 " solarized colorscheme
-" Bundle "http://github.com/altercation/vim-colors-solarized"
-Bundle "mayansmoke"
-Bundle "http://github.com/msanders/snipmate.vim"
-Bundle "http://github.com/tpope/vim-surround"
-Bundle "Align"
-Bundle "YankRing.vim"
+" Plugin 'altercation/vim-colors-solarized'
+" let g:solarized_termcolors=256
+" set background=dark
+" colorscheme solarized
+
+Plugin 'zeis/vim-kolor'
+Plugin 'msanders/snipmate.vim'
+Plugin 'tpope/vim-surround'
+Plugin 'Align'
+Plugin 'YankRing.vim'
 nnoremap <silent> <Leader>yy :YRShow<CR>
 
-Bundle "mru.vim"
+Plugin 'mru.vim'
 nmap <silent> <Leader>rr :MRU<CR>
 
-" Bundle "Conque-Shell"
+" Plugin 'Conque-Shell'
 " nmap <silent> <Leader>vt <CR>:ConqueTermTab bash<CR>
 " let g:ConqueTerm_CloseOnEnd = 1
 
-Bundle "Indent-Guides"
+Plugin 'Indent-Guides'
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1 
 
-Bundle "EasyMotion"
+Plugin 'EasyMotion'
 let g:EasyMotion_do_shade = 0
 let g:EasyMotion_leader_key = '<Leader>m' 
 
 " FuzzyFinder
-" Bundle 'L9'
-" Bundle 'FuzzyFinder'
+" Plugin 'L9'
+" Plugin 'FuzzyFinder'
 " nmap <leader>fb  :FufBuffer<CR>
 " nmap <leader>fc  :FufDirWithCurrentBufferDir<CR>
 " nmap <leader>fd  :FufDir<CR>
 " nmap <leader>ff  :FufFile<CR>
 
 " tComment
-Bundle 'tComment'
+Plugin 'tComment'
 nnoremap <leader>cc :TComment<CR>
 vnoremap <leader>cc :TComment<CR>
 
-" Command-T
-Bundle "http://github.com/wincent/Command-T"
-let g:CommandTCancelMap=['<ESC>','<C-c>']
-let g:CommandTMatchWindowAtTop=1
-nmap <silent> <Leader>ff :CommandT<CR>
-nmap <silent> <Leader>fb :CommandTBuffer<CR>
+" " Command-T
+" Plugin 'http://github.com/wincent/Command-T'
+" let g:CommandTCancelMap=['<ESC>','<C-c>']
+" let g:CommandTMatchWindowAtTop=1
+" nmap <silent> <Leader>ff :CommandT<CR>
+" nmap <silent> <Leader>fb :CommandTBuffer<CR>
 
 
 " taglist
-Bundle 'http://github.com/vim-scripts/taglist.vim'
-let Tlist_Ctags_Cmd="/Users/cnhacktnt/homebrew/Cellar/ctags/5.8/bin/ctags"
+Plugin 'vim-scripts/taglist.vim'
+let Tlist_Ctags_Cmd='/Users/cnhacktnt/homebrew/Cellar/ctags/5.8/bin/ctags'
 nnoremap <leader>ct  :TlistToggle <CR>
 
-" }}}
+" TagBar
+Plugin 'majutsushi/tagbar'
+nmap <F4> :TagbarToggle<CR>
+
+" CtrlP
+Plugin 'kien/ctrlp.vim'
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'ra'
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+
+" Neocomplcache
+" Plugin 'http://github.com/Shougo/neocomplcache.vim'
+" let g:neocomplcache_enable_at_startup = 1
+
+Plugin 'Valloric/YouCompleteMe.git'
+
+
+" perlomni
+" Plugin 'c9s/perlomni.vim'
+
+" tabber
+Plugin 'fweep/vim-tabber.git'
+set tabline=%!tabber#TabLine()
+
+let g:tabber_wrap_when_shifting = 1
+
+" nnoremap <silent> <C-t>            :999TabberNew<CR>
+" nnoremap <silent> <Leader><Leader> :TabberSelectLastActive<CR>
+" nnoremap <silent> <Leader>tn       :TabberNew<CR>
+" nnoremap <silent> <Leader>tm       :TabberMove<CR>
+nnoremap <silent> <Leader>tn       :tabnew<CR>
+nnoremap <silent> <Leader>tc       :tabclose<CR>
+" nnoremap <silent> <Leader>tl       :TabberShiftLeft<CR>
+" nnoremap <silent> <Leader>tr       :TabberShiftRight<CR>
+" nnoremap <silent> <Leader>ts       :TabberSwap<CR>
+nnoremap <silent> <Leader>1        :tabnext 1<CR>
+nnoremap <silent> <Leader>2        :tabnext 2<CR>
+nnoremap <silent> <Leader>3        :tabnext 3<CR>
+nnoremap <silent> <Leader>4        :tabnext 4<CR>
+nnoremap <silent> <Leader>5        :tabnext 5<CR>
+nnoremap <silent> <Leader>6        :tabnext 6<CR>
+nnoremap <silent> <Leader>7        :tabnext 7<CR>
+nnoremap <silent> <Leader>8        :tabnext 8<CR>
+nnoremap <silent> <Leader>9        :tabnext 9<CR>
+
+call vundle#end()
+
+""""""""""""""
+" Vundle END 
 
 filetype plugin indent on
 filetype plugin on
@@ -211,5 +260,6 @@ if has('gui_running')
     set cursorline
     "set background=dark
 endif
+
 
 
