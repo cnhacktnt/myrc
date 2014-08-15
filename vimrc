@@ -148,6 +148,7 @@ Plugin 'msanders/snipmate.vim'
 Plugin 'tpope/vim-surround'
 Plugin 'Align'
 Plugin 'YankRing.vim'
+let g:yankring_history_dir = '~/.vim/'
 nnoremap <silent> <Leader>yy :YRShow<CR>
 
 Plugin 'mru.vim'
@@ -260,6 +261,5 @@ if has('gui_running')
     set cursorline
     "set background=dark
 endif
-
 
 
