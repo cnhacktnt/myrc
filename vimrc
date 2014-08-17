@@ -239,6 +239,9 @@ nnoremap <silent> <Leader>7        :tabnext 7<CR>
 nnoremap <silent> <Leader>8        :tabnext 8<CR>
 nnoremap <silent> <Leader>9        :tabnext 9<CR>
 
+" SparkUp
+Plugin 'rstacruz/sparkup'
+
 call vundle#end()
 
 """"""""""""""
