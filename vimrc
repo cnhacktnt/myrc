@@ -41,7 +41,7 @@ set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{CurDir()}%h\ \ \ Line:\ 
 
 " for statusline
 function! CurDir()
-    let curdir = substitute(getcwd(), '/Users/cnhacktnt/', "~/", "g")
+    let curdir = substitute(getcwd(), '/Users/xxx/', "~/", "g")
     return curdir
 endfunction
 
@@ -144,7 +144,6 @@ call vundle#begin()
 " colorscheme solarized
 
 Plugin 'zeis/vim-kolor'
-Plugin 'msanders/snipmate.vim'
 Plugin 'tpope/vim-surround'
 Plugin 'Align'
 Plugin 'YankRing.vim'
@@ -189,7 +188,7 @@ vnoremap <leader>cc :TComment<CR>
 
 " taglist
 Plugin 'vim-scripts/taglist.vim'
-let Tlist_Ctags_Cmd='/Users/cnhacktnt/homebrew/Cellar/ctags/5.8/bin/ctags'
+let Tlist_Ctags_Cmd='/Users/xxx/homebrew/Cellar/ctags/5.8/bin/ctags'
 nnoremap <leader>ct  :TlistToggle <CR>
 
 " TagBar
@@ -208,7 +207,25 @@ let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 " Plugin 'http://github.com/Shougo/neocomplcache.vim'
 " let g:neocomplcache_enable_at_startup = 1
 
+" Plugin 'msanders/snipmate.vim'
+
+" YouCompleteMe
 Plugin 'Valloric/YouCompleteMe.git'
+
+" Track the engine.
+Plugin 'SirVer/ultisnips'
+
+" Snippets are separated from the engine. Add this if you want them:
+Plugin 'honza/vim-snippets'
+
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<Leader><tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
 
 
 " perlomni
