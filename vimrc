@@ -104,6 +104,9 @@ noremap <D-9> 10gt
 noremap <D-S-right> gt
 noremap <D-S-left> gT
 
+" perldoc
+autocmd FileType perl :noremap K :!perldoc <cword> <bar><bar> perldoc -f <cword><cr>
+
 " misc
 nnoremap ; :
 map <leader>pp :setlocal invpaste<cr>
